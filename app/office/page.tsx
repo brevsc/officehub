@@ -8,12 +8,10 @@ export default function Office(){
         <a href="/office/search">Consulta Dados</a>
       </li>
       <li>
-        <p>Acompanhar Meta</p>
-        <a href="/meta"></a>
+        <a href="/office/meta">Acompanhar Meta</a>
       </li>
       <li>
-        <p>Verifica Falta</p>
-        <a href="/check-absense"></a>
+        <a href="/office/check-absense">Verifica Falta</a>
       </li>
     </ul>
   )
