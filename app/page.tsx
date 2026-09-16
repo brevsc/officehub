@@ -1,7 +1,10 @@
 // initial hero/login page
 
-export default function Home(){
+export default function Home() {
   return (
-    <a href="/office">login</a>
-  )
+    <div className="flex flex-col flex-wrap">
+      <a href="/public/login">login</a>
+      <a href="/public/register">register</a>
+    </div>
+  );
 }
