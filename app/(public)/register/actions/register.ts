@@ -16,10 +16,7 @@ export async function register(formData: FormData) {
 
   if (!result.success) {
     const errors = treeifyError(result.error)
-    return {
-      success: false,
-      errors,
-    };
+    return
   }
 
   const { name, email, password, password_confirmation } = result.data;
@@ -30,8 +27,8 @@ export async function register(formData: FormData) {
       name,
       email,
       password: passwordHash,
+      companyId: 1,
     });
-
     return {
       success: true,
     };
