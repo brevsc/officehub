@@ -1,34 +1,59 @@
+import { sql } from "drizzle-orm";
 import {
   pgTable,
   varchar,
-  serial,
   timestamp,
   numeric,
   date,
+  integer,
+  uuid,
+  serial,
+  index,
 } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
-  id: serial("id").primaryKey().notNull(),
+  id: uuid("id").primaryKey().notNull().defaultRandom(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),
+  companyId: integer("company_id").references(() => companiesTable.id, {
+    onDelete: "cascade",
+  }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
+export const sessionsTable = pgTable(
+  "sessions",
+  {
+    id: uuid("id").primaryKey().notNull(),
+    userId: uuid("user_id").references(() => usersTable.id, {
+      onDelete: "cascade",
+    }),
+    createdAt: timestamp("created_at", {
+      withTimezone: true,
+    })
+      .notNull()
+      .defaultNow(),
+    expiresAt: timestamp("expires_at", {
+      withTimezone: true,
+    })
+      .notNull()
+      .default(sql`now() + interval '30 days'`),
+  },
+  (table) => ({
+    userIdIdx: index("sessions_user_id_idx").on(table.userId),
+  }),
+);
+
 export const companiesTable = pgTable("companies", {
   id: serial("id").notNull().primaryKey(),
-  userId: serial("user_id")
-    .notNull()
-    .references(() => usersTable.id, {
-    onDelete: "cascade",
-  }),
   name: varchar("name", { length: 255 }).notNull(),
 });
 
 export const goalsTable = pgTable("goals", {
   id: serial("id").notNull().primaryKey(),
-  companyId: serial("company_id").references(() => companiesTable.id, {
+  companyId: integer("company_id").references(() => companiesTable.id, {
     onDelete: "cascade",
   }),
   month: date("month").notNull(),
