@@ -1,4 +1,4 @@
-export default function CheckAbsense(){
+export default function CheckAttendance(){
   return(
     <p>Consultar faltas</p>
   )

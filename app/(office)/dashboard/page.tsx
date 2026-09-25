@@ -12,10 +12,10 @@ export default async function Dashboard(){
         <Link href='/dashboard/search'>Consulta Dados</Link>
       </li>
       <li>
-        <Link href="/dashboard/meta">Acompanhar Meta</Link>
+        <Link href="/dashboard/goals">Acompanhar Meta</Link>
       </li>
       <li>
-        <Link href="/dashboard/check-absense">Verifica Falta</Link>
+        <Link href="/dashboard/check-attendance">Verifica Falta</Link>
       </li>
     </ul>
     </div>
