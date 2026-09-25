@@ -1,0 +1,1 @@
+ALTER TABLE "goals" ADD COLUMN "remaining" numeric(12,2) DEFAULT '0' NOT NULL;

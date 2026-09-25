@@ -56,7 +56,7 @@ export const goalsTable = pgTable("goals", {
   companyId: integer("company_id").references(() => companiesTable.id, {
     onDelete: "cascade",
   }),
-  month: date("month").notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
   entry: numeric("entry", {
     precision: 12,
     scale: 2,
@@ -75,6 +75,13 @@ export const goalsTable = pgTable("goals", {
   })
     .notNull()
     .default("0"),
+
+  stock_transfer: numeric("stock_transfer", {
+    precision: 12,
+    scale: 2,
+  })
+    .notNull()
+    .default("0"),
   revenue: numeric("revenue", {
     precision: 12,
     scale: 2,
@@ -87,25 +94,20 @@ export const goalsTable = pgTable("goals", {
   })
     .notNull()
     .default("0"),
-  nfeOutput: numeric("nfe_output", {
-    precision: 12,
-    scale: 2,
-  })
-    .notNull()
-    .default("0"),
-  nfceOutput: numeric("nfce_output", {
-    precision: 12,
-    scale: 2,
-  })
-    .notNull()
-    .default("0"),
-  totalOutput: numeric("total_output", {
+
+  sales: numeric("sales", {
     precision: 12,
     scale: 2,
   })
     .notNull()
     .default("0"),
   target: numeric("target", {
+    precision: 12,
+    scale: 2,
+  })
+    .notNull()
+    .default("0"),
+  remaining: numeric("remaining", {
     precision: 12,
     scale: 2,
   })
